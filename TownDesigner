@@ -1,0 +1,339 @@
+from turtle import *
+
+
+#---------------------------------------HOUSE_FUNCTIONS--------------------------------#
+
+
+def square(size, color, pcolor):
+  pencolor(pcolor)
+  fillcolor(color)
+  begin_fill()
+  pendown()
+  for i in range(4):
+    forward(size)
+    right(90)
+  end_fill()
+        
+def triangle(size, color1, pcolor):
+  pencolor(pcolor)
+  fillcolor(color1)
+  begin_fill()
+  pendown()
+  for i in range(3):
+    forward(size)
+    left(120) 
+  end_fill()
+    
+    
+  
+def windows_right(size, color2, pcolor):
+  pencolor(pcolor)
+  pendown()
+  left(90)
+  for i in range(4):
+    right(90)
+    fillcolor(color2)
+    begin_fill()
+    for i in range(4):
+      forward(size/6)
+      right(90)
+    forward(size/3)
+    end_fill()
+    
+def windows_left(size, color2, pcolor):
+  penup()
+  right(90)
+  forward((size/3)*2)
+  pendown()
+  windows_right(size, color2, pcolor)
+  end_fill()
+    
+    
+    
+def door(size, color3, pcolor):
+  pencolor(pcolor)
+  penup()
+  right(90)
+  forward(size/3)
+  right(90)
+  forward(size)
+  right(90)
+  forward((size/3)*2)
+  right(90)
+  pendown()
+  
+  for i in range(3):
+    fillcolor(color3)
+    begin_fill()
+    forward(size/2)
+    right(90)
+    forward(size/3)
+    right(90)
+    end_fill()
+  
+  
+  forward(size/2)
+  right(90)
+  forward((size/3)*2)
+  right(90)
+  forward(size)
+  right(90)
+  
+  
+#----------------------------------------------DESIGN_FUNCTIONS--------------------------------------------#
+  
+  
+def SorM(planet):
+  pencolor(planet)
+  penup()
+  goto(-190, 130)
+  pendown()
+  fillcolor(planet)
+  begin_fill()
+  circle(15)
+  end_fill()
+       
+def sky(col):
+  pencolor(col)
+  fillcolor(col)
+  begin_fill()
+  for i in range(2):
+    forward(400)
+    left(90)
+    forward(100)
+    left(90)
+  end_fill()
+  
+
+  
+def roadesign(size, num, street):
+  penup()
+  goto(-186, 50)
+  pendown()
+  pencolor("grey")
+  fillcolor("grey")
+  begin_fill()
+  for i in range(2):
+    forward(26)
+    right(90)
+    forward(200)
+    right(90)
+  end_fill()
+  
+  penup()
+  forward(13)
+  right(90)
+  pencolor("yellow")
+  for i in range(25):
+    pendown()
+    forward(5)
+    penup()
+    forward(3)
+  penup()
+  left(90)
+   
+  right(90)
+  goto(-150, -150)    
+  left(90)
+  forward(size * num + 20)
+  left(90)
+    
+  pencolor("grey")
+  pendown()
+    
+  fillcolor("grey")
+  begin_fill()
+  for i in range(2):
+    forward(200)
+    right(90)
+    forward(26)
+    right(90)
+    
+  end_fill()
+    
+  right(90)
+  forward(13)
+  left(90)
+   
+  pencolor("yellow")
+  for i in range(25):
+    forward(5)
+    penup()
+    forward(3)
+    pendown()
+    
+  penup()
+  goto(-200, 50)
+  right(180)
+  forward(size * street * 1.8 + street)
+  
+  left(90)
+  
+  pencolor("grey")
+  fillcolor("grey")
+  begin_fill()
+  for i in range(2):
+    forward(400)
+    right(90)
+    forward(26)
+    right(90)
+    
+  end_fill()
+  
+  right(90)
+  forward(13)
+  left(90)
+  
+  pencolor("yellow")
+  for i in range(50):
+    forward(5)
+    penup()
+    forward(3)
+    pendown()
+  
+
+  
+def road(choice, size, num, street):
+  if choice == "yes":
+    roadesign(size, num, street)
+  else:
+    pass
+
+def for_design(size):
+  fillcolor("brown")
+  begin_fill()
+  for i in range(2):
+    forward(size/3)
+    right(90)
+    forward(size)
+    right(90)
+    
+  end_fill()
+  
+  penup()
+  right(180)
+  forward(size/3)
+  right(180)
+  
+  fillcolor("ForestGreen")
+  begin_fill()
+  for i in range(3):
+    forward(size)
+    left(120)
+  forward(size/3)  
+  end_fill()  
+    
+    
+def forest(choice1, size, num, street):
+  penup()
+  goto(-150, 50)
+  forward(size * num + 2 * num + 60)
+
+  if choice1 == "yes":
+    for_design(size)
+    penup()
+    goto(-150, 50)
+    forward(size * num + 2 * num + 60)
+    num_trees = ((350 - size*num - num*2 - 66)/size)
+    for i in range(round(num_trees)):
+      for i in range(street):
+        for_design(size)
+        right(90)
+        forward(2 * size + 1)
+        left(90)
+      
+      left(90)
+      forward(size * street * 2 + street)
+      right(90)
+      forward(size)
+  else:
+    print(" ")
+  
+def background(time):
+  bgcolor("LawnGreen")
+  penup()
+  goto(-200, 50)
+  pendown()
+  if time == "daytime":
+    sky("cyan")  
+    SorM("yellow")
+    
+  else:
+    sky("black")    
+    SorM("white")
+
+   
+    
+def HOUSE(size, color, color1, pcolor):
+  speed(0)
+  triangle(size, color, pcolor)
+  square(size, color1, pcolor)
+
+def MANSION(size, color, color1, color2, color3, pcolor):
+  speed(0)
+  triangle(size, color, pcolor)
+  square(size, color1, pcolor)
+  windows_right(size, color2, pcolor)
+  windows_left(size, color2, pcolor)
+  door(size, color3, pcolor)   
+  
+
+def Mansionstreet(size, num, street, color, color1, color2, color3, pcolor):
+  penup()
+  goto(-150, 50)
+  for i in range(street):
+    for i in range(num):
+      pendown()
+      MANSION(size, color, color1, color2, color3, pcolor)
+      penup()
+      forward(size + 2)
+    backward(size * num + 2 * num)
+    right(90)
+    forward(size * 2 + 1)
+    left(90)
+        
+def Housestreet(size, num, street, color, color1, pcolor):
+  penup()
+  goto(-150, 50)
+  for i in range(street):
+    for i in range(num):
+      pendown()
+      HOUSE(size, color, color1, pcolor)
+      penup()
+      forward(size + 2)
+    backward(size * num + 2 * num)
+    right(90)
+    forward(size * 2 + 1)
+    left(90)
+      
+
+#-------------------------------MAINLINE-------------------------------#
+
+
+print("Welcome to Rahul Mandadapu's TownCreator. Create your own town.")
+MorH = input("Mansion or House(M/H): ")
+num_streets = int(input("What is the number of streets(max 3): "))
+num_buildings = int(input("What is the number of buildings per street(max 6): "))
+SIZE = int(input("What is the size(max 30): "))
+ROAD = input("Do you want a road: ")
+FOREST = input("Do you want a forest: ")
+TIME = input("What is the time of day(daytime or nightime): ")
+print("For the following questions, state the color or HEX value.")
+pen_color = input("What is the pen color: ")
+tri_color = input("What is the roof color: ")
+squ_color = input("What is the wall color: ")
+
+
+if MorH == "M":
+  wind_color = input("What is the window color: ")
+  door_color = input("What is the door color: ")
+  background(TIME)
+  Mansionstreet(SIZE, num_buildings, num_streets, tri_color, squ_color, wind_color, door_color, pen_color)
+  
+else:
+  background(TIME)
+  Housestreet(SIZE, num_buildings, num_streets, tri_color, squ_color, pen_color)
+  
+  
+road(ROAD, SIZE, num_buildings, num_streets)
+forest(FOREST, SIZE, num_buildings, num_streets)
